@@ -21,11 +21,11 @@ mysqli_select_db($conn, $database);
 
 $sqlCreateUsersTable = "
     CREATE TABLE IF NOT EXISTS users (
-        UserId INT AUTO INCREMENT PRIMARY KEY,
+        UserId INT AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(255) UNIQUE,
         name varchar(50), 
         password VARCHAR(255),
-        email VARCHAR(255),
+        email VARCHAR(255)
     )";
 if (mysqli_query($conn, $sqlCreateUsersTable)) {
     echo "Users table created successfully<br>";

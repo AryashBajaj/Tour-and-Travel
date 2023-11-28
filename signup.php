@@ -69,7 +69,7 @@ if (isset($_POST["signup"])) {
 <body>
   <img src="https://images.pexels.com/photos/998641/pexels-photo-998641.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" id="backgroundVideo">
   <img src="https://images.pexels.com/photos/1624496/pexels-photo-1624496.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" alt="Mobile-Imange" id="backgroundImage">
-  <div class="Site-Title"><a href="../index.html" class="Text">TRAVELLOG</a></div>
+  <div class="Site-Title"><a href="index.php" class="Text">TRAVELLOG</a></div>
   <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post" id="signup-form">
     <div class="login-box">
       <h1 id="sutext">Sign Up</h1>
