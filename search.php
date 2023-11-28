@@ -1,6 +1,15 @@
 <?php 
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "dbwproj");
+function determineSeason($arrivalDate) {
+    $month = date('m', strtotime($arrivalDate));
+    if ($month >= 10 || $month <= 2) {
+        return 1;
+    } elseif ($month >= 3 && $month <= 6) {
+        return 2;
+    } else {
+        return 3;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -107,41 +116,80 @@ $conn = mysqli_connect("localhost", "root", "", "dbwproj");
     </div>
 
     <div class="search">
-        <form action="">
+        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" id="search-form">
             <table class="form-table">
                 <tr>
                     <td>Arrival Date</td>
                     <td colspan="2">
-                        <input type="date">
+                        <input type="date" name="arrivalDate" id="arrivalDate">
                     </td>
                 </tr>
                 <tr>
                     <td>Departure Date</td>
                     <td colspan="2">
-                        <input type="date" name="" id="">
+                        <input type="date" name="departureDate" id="departureDate">
                     </td>
                 </tr>
                 <tr>
                     <td>People</td>
                     <td>Adults: 
-                        <input type="number">
+                        <input type="number" name="adults" id="kids">
                     </td>
                     <td>
                         Kids:
-                        <input type="number" name="" id="">
+                        <input type="number" name="kids" id="kids">
                     </td>
                 </tr>
                 <tr>
                     <td>Preference:</td>
                     <td>
-                        <input type="checkbox" name="pref" id="beach"> Beaches <br>
-                        <input type="checkbox" name="pref" id="mountain"> Mountains <br>
-                        <input type="checkbox" name="pref" id="land"> Land <br>
-                        <input type="checkbox" name="pref" id="pilgrimage"> Pilgrimage <br>
+                        <input type="checkbox" name="pref[]" id="beach" value="beaches"> Beaches <br>
+                        <input type="checkbox" name="pref[]" id="mountain" value="mountains"> Mountains <br>
+                        <input type="checkbox" name="pref[]" id="land" value="grasslands"> Land <br>
+                        <input type="checkbox" name="pref[]" id="pilgrimage" value="pilgrimage"> Pilgrimage <br>
                     </td>
+                </tr>
+                <tr>
+                    <td><button name="search" value="search">Search</button></td>
                 </tr>
             </table>
         </form>
     </div>
+<?php
+    if (isset($_POST['search'])) {
+        $conn = mysqli_connect("localhost", "root", "", "dbwproj");
+        $arrivalDate = $_POST['arrivalDate'];
+        $departureDate = $_POST['departureDate'];
+        $adults = $_POST['adults'];
+        $kids = $_POST['kids'];
+        $preference = isset($_POST['pref']) ? $_POST['pref'] : [];
+        $season = determineSeason($arrivalDate);
+        $sql = "SELECT l.*, ld.* FROM locations l, ld WHERE l.locationId = ld.lid AND `season` = $season";
+        foreach ($preference as $pref) {
+            $sql .= " AND `$pref` = 1";
+        }
+        $res = mysqli_query($conn, $sql);
+        $data = array();
+        while ($row = mysqli_fetch_assoc($res)) {
+            $data[] = $row;
+        }
+        echo json_encode($data);
+    }
+?>
+<script>
+    function displayResults(res) {
+        
+    }
+    var xml = new XMLHttpRequest();
+    xml.open("GET", "search.php", true);
+    xml.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = JSON.parse(this.responseText);
+            console.log(res);
+            displayResults(res);
+        }
+    }
+    xml.send();
+</script>
 </body>
 </html>
