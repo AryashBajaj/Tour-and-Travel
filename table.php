@@ -25,7 +25,7 @@ $sqlCreateUsersTable = "
         username VARCHAR(255) UNIQUE,
         name varchar(50), 
         password VARCHAR(255),
-        email VARCHAR(255),
+        email VARCHAR(255)
     )";
 if (mysqli_query($conn, $sqlCreateUsersTable)) {
     echo "Users table created successfully<br>";
