@@ -1,7 +1,11 @@
+td {
+        color: white;
+    }
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 body{
     height: 100vh;
@@ -69,14 +73,36 @@ body{
     height: 500px;
     padding: 0 90px;
 }
-.form-table, .form-table tr, .form-table td{
-    border: 2px solid white;
-}
 .form-table{
-    border: 1px solid white;
-    height: 200px;
+    /* border: 1px solid white; */
+    border-radius: 13px;
+    height: 300px;
     width: 300px;
+    background-color: rgba(255, 255, 255, 0.095);
+    padding: 10px;
 }
 td {
     color: white;
+}
+.heading{
+    /* margin-right: 4px; */
+    padding-right: 9px;
+}
+.date{
+    width: 70%;
+    text-align: center;
+    height: 27px;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+#search{
+    padding: 8px;
+    border: none;
+    /* outline: none; */
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    font-size: large;
+    border-radius: 6px;
 }
