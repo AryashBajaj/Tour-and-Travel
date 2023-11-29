@@ -1,0 +1,134 @@
+*{
+    margin:0;
+    padding:0;
+    font-family: 'poppins',sans-serif;
+}
+.container{
+    width:100%;
+    height:100vh;
+    background-image:linear-gradient(to right,#36D1DC,#5B86E5);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position:relative;
+}
+
+.formbox{
+   
+    width:90%;
+    max-width: 450px;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    background-color: aliceblue;
+    
+}
+
+.formbox h1{
+    margin-bottom: 35px;
+    position: relative;
+    margin-top: 20px;
+}
+
+.formbox h1::after{
+    content:'';
+    width:30px;
+    height:4px;
+    border-radius: 5px;
+    position: absolute;
+    bottom:-12px;
+    left:50%;
+    transform: translateX(-50%);
+    background:black;
+
+}
+
+/* .input-group{
+    padding-left: 75px;
+} */
+
+.input-field{
+    margin:5px;
+    padding: 0 5px;
+    display: flex;
+    border-radius: 8px;
+    align-items: center;
+    max-height: 65px;
+    transition:max-height 1s;
+    overflow:hidden;
+}
+.input-field i{
+    margin-left:10px;
+    margin-right: 10px;
+
+    /* height: 100px;
+    width: 100px; */
+}
+
+
+
+.det{
+    /* background-color: rgb(251, 251, 251); */
+    width: 50%;
+    height: 100%;
+    font-size: large;
+    padding: 12px 9px;
+    color: black;
+}
+
+#hide2{
+    text-align: center;
+    font-size: large;
+    color: black;
+    font-weight: bold;
+}
+
+input{
+    width:100%;
+    background-color:white;
+    border:0;
+    outline:0;
+    padding:12px 9px
+
+}
+
+form p{
+    color:blue;
+    text-align: left;
+    font-size: 13px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    margin-left:15px;
+}
+a{
+    text-decoration: none;
+}
+.buttonfield{
+    width:100%;
+    display :flex;
+    justify-content: space-around;
+}
+
+.buttonfield button{
+    flex-basis:48%;
+    background-color:blue;
+    height:40px;
+    border-radius: 20px;
+    border:0;
+    outline:0;
+    cursor: pointer;
+    transition: background 1s;
+    margin-bottom: 25px;
+}
+
+
+
+.buttonfield button.disable{
+    background-color:white;
+    color:#555;}
+
+.input-group{
+    height:220px;
+}

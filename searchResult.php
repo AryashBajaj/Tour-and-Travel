@@ -61,11 +61,7 @@ session_start();
         <script>
         function displayResults(res) {
             var resultsContainer = document.querySelector('.search-results');
-
-            // Clear previous results
             resultsContainer.innerHTML = '';
-
-            // Loop through each result
             res.forEach(function (result) {
                 // Create a div to hold each result
                 var resultDiv = document.createElement('div');
@@ -95,8 +91,6 @@ session_start();
                 resultDiv.appendChild(nameParagraph);
                 resultDiv.appendChild(featuresParagraph);
                 resultDiv.appendChild(hotelsLink);
-
-                // Append the result div to the results container
                 resultsContainer.appendChild(resultDiv);
             });
         }

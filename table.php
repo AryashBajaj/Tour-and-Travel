@@ -67,20 +67,6 @@ if (mysqli_query($conn, $sqlCreateLocationDetails)) {
     echo "Error creating ld table: " . mysqli_error($conn) . "<br>";
 }
 
-$sqlCreateSavedTable = "
-    CREATE TABLE IF NOT EXISTS saved (
-        userId INT,
-        locationId INT,
-        PRIMARY KEY (userId, locationId),
-        FOREIGN KEY (userId) REFERENCES users(UserId),
-        FOREIGN KEY (locationId) REFERENCES locations(locationId)
-    )";
-if (mysqli_query($conn, $sqlCreateSavedTable)) {
-    echo "Saved table created successfully<br>";
-} else {
-    echo "Error creating Saved table: " . mysqli_error($conn) . "<br>";
-}
-
 $sqlCreateHotelsTable = "
     CREATE TABLE IF NOT EXISTS hotels (
         hid INT PRIMARY KEY,
@@ -110,6 +96,15 @@ if (mysqli_query($conn, $sqlCreateHotelRoomTable)) {
 } else {
     echo "Error creating Hotel Room table: " . mysqli_error($conn) . "<br>";
 }
+
+$sql = "CREATE TABLE `updatelog` (`userID` INT, `oldName` VARCHAR(60), `newName` VARCHAR(60), `oldEmail` VARCHAR(60), `newEmail` VARCHAR(60), `date` DATETIME DEFAULT CURRENT_TIMESTAMP )";
+if (mysqli_query($conn, $sqlCreateHotelRoomTable)) {
+    echo "Update log table created successfully<br>";
+} else {
+    echo "Error creating update log table: " . mysqli_error($conn) . "<br>";
+}
+
+
 
 mysqli_close($conn);
 ?>

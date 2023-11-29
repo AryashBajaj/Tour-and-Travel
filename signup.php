@@ -34,7 +34,7 @@ if (isset($_POST["signup"])) {
             $_SESSION["name"] = $name;
             $_SESSION["username"] = $username;
             $_SESSION["email"] = $email;
-            $_SESSION["Logged"] = true;
+            $_SESSION["logged"] = true;
             echo "Succesfully signed Up!";
             echo "
             <script>

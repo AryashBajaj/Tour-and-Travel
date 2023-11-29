@@ -114,7 +114,7 @@ session_start();
                         <i class="fa-solid fa-user" style="color: #ffffff;"></i>
                     </a>
                     <br>
-                    <div style="text-align:center; font-family: 'Karla', Sans-serif; font-size: 25px; color: white"> <p> Hi, <?php echo $_SESSION["name"]; ?> </p></div>
+                    <div style="text-align:center; font-family: 'Karla', Sans-serif; font-size: 25px; color: white"> <p> Hi, <?php echo $_SESSION["name"]?> </p></div>
                 </div>
         </div>
 
