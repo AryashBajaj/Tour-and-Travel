@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION["name"] = "";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -108,6 +107,7 @@ $_SESSION["name"] = "";
                     <li><a href="search.php">Search Menu</a></li>
                     <li><a href="#testimonials">Testimonial</a></li>
                     <li><a href="#contact">Contact</a></li>
+                    <li><a href="logout.php">Log Out</a></li>
                 </ul>
                 </div>
                 <div>

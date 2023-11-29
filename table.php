@@ -95,8 +95,17 @@ if (mysqli_query($conn, $sqlCreateHotelRoomTable)) {
     echo "Error creating Hotel Room table: " . mysqli_error($conn) . "<br>";
 }
 
-$sql = "CREATE TABLE updatelog ('userID' INT, 'oldName' VARCHAR(60), 'newName' VARCHAR(60), 'oldEmail' VARCHAR(60), 'newEmail' VARCHAR(60), 'date' DATETIME DEFAULT CURRENT_TIMESTAMP)";
-if (mysqli_query($conn, $sqlCreateHotelRoomTable)) {
+$sqlCreateUpdateLogTable = "
+    CREATE TABLE IF NOT EXISTS updatelog (
+        userID INT,
+        oldName VARCHAR(60),
+        newName VARCHAR(60),
+        oldEmail VARCHAR(60),
+        newEmail VARCHAR(60),
+        date DATETIME DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (userID)
+    )";
+if (mysqli_query($conn, $sqlCreateUpdateLogTable)) {
     echo "Update log table created successfully<br>";
 } else {
     echo "Error creating update log table: " . mysqli_error($conn) . "<br>";
