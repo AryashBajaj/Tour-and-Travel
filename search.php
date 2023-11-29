@@ -12,8 +12,66 @@ session_start();
         td {
             color: white;
         }
+        .search-results {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .result-item {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+            cursor: pointer;
+        }
+
+        .result-item:hover {
+            transform: scale(1.05);
+        }
+
+        .result-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .result-item p {
+            padding: 10px;
+            text-align: center;
+        }
+
+        /* Style for "Hotels in this area" link */
+        .result-item a {
+            display: block;
+            text-align: center;
+            padding: 10px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 0 0 8px 8px;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .result-item a:hover {
+            background-color: #2980b9;
+        }
     </style>
 </head>
+<?php
+    if (isset($_POST["search"])) {
+        $_SESSION["arrivalDate"] = $_POST["arrivalDate"];
+        $_SESSION["departureDate"] = $_POST["departureDate"];
+        $_SESSION["adults"] = $_POST["adults"];
+        $_SESSION["kids"] = $_POST["kids"];
+        $_SESSION["pref"] = isset($_POST["pref"]) ? $_POST["pref"] : [];
+        echo "<script>
+            location.replace('searchResult.php');
+        </script>
+        ";
+    }
+?>
 <body>
     <div class="content">
         <h2>Find your next travel.</h2>
@@ -31,7 +89,7 @@ session_start();
     </div>
 
     <div class="search">
-        <form action="search.php" method="post" id="search-form">
+        <form method="post" id="search-form">
             <table class="form-table">
                 <tr>
                     <td>Arrival Date</td>
@@ -65,43 +123,12 @@ session_start();
                     </td>
                 </tr>
                 <tr>
-                    <td><button id="search" name="search" value="search">Search</button></td>
+                    <td><input type="submit" id="search" name="search" value="search"></td>
                 </tr>
             </table>
         </form>
     </div>
     <div class="search-results">
-        <!-- Results will be displayed here -->
     </div>
-<?php
-if (isset($_POST['login'])) {
-    $_SESSION["arrivalDate"] = $_POST['arrivalDate'];
-    $_SESSION["departureDate"] = $_POST['departureDate'];
-    $_SESSION["adults"] = $_POST['adults'];
-    $_SESSION["kids"] = $_POST['kids'];
-    $_SESSION["preference"] = isset($_POST['pref']) ? $_POST['pref'] : [];
-}
-?>
-<script>
-    function displayResults(res) {
-        return;
-    }
-    function func() {
-        event.preventDefault();
-        var xml = new XMLHttpRequest();
-        xml.open("GET", "search1.php", true);
-        xml.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                console.log("Hello");
-                var res = JSON.parse(this.responseText);
-                console.log(res);
-                console.log(this.responseText);
-            }
-        }
-        xml.send();
-    }
-    document.getElementById("search").addEventListener("click", func);
-</script>
-
 </body>
 </html>

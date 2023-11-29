@@ -22,7 +22,11 @@ if (!$res->num_rows) {
         $_SESSION["email"] = $email;
         $_SESSION["name"] = $name;
         $_SESSION["logged"] = true;
-        
+        $_SESSION["arrivalDate"] = "";
+        $_SESSION["departureDate"] = "";
+        $_SESSION["adults"] = "";
+        $_SESSION["kids"] = "";
+        $_SESSION["pref"] = [];
         echo `<p style='color:crimson;'>Succesfully logged in.</p>`;
         echo "
         <script>
