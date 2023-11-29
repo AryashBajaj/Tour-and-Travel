@@ -53,14 +53,12 @@ if (mysqli_query($conn, $sqlCreateLocationsTable)) {
 } else {
     echo "Error creating Locations table: " . mysqli_error($conn) . "<br>";
 }
-
 $sqlCreateLocationDetails = "
     CREATE TABLE IF NOT EXISTS ld (
         lid INT PRIMARY KEY,
         wlink varchar(200),
         ilink varchar(1000)
     )";
-
 if (mysqli_query($conn, $sqlCreateLocationDetails)) {
     echo "ld table created succesfully.";
 } else {
@@ -97,13 +95,12 @@ if (mysqli_query($conn, $sqlCreateHotelRoomTable)) {
     echo "Error creating Hotel Room table: " . mysqli_error($conn) . "<br>";
 }
 
-$sql = "CREATE TABLE `updatelog` (`userID` INT, `oldName` VARCHAR(60), `newName` VARCHAR(60), `oldEmail` VARCHAR(60), `newEmail` VARCHAR(60), `date` DATETIME DEFAULT CURRENT_TIMESTAMP )";
+$sql = "CREATE TABLE updatelog ('userID' INT, 'oldName' VARCHAR(60), 'newName' VARCHAR(60), 'oldEmail' VARCHAR(60), 'newEmail' VARCHAR(60), 'date' DATETIME DEFAULT CURRENT_TIMESTAMP)";
 if (mysqli_query($conn, $sqlCreateHotelRoomTable)) {
     echo "Update log table created successfully<br>";
 } else {
     echo "Error creating update log table: " . mysqli_error($conn) . "<br>";
 }
-
 
 
 mysqli_close($conn);
