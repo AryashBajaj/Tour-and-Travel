@@ -88,16 +88,9 @@ session_start();
                 if (result.grasslands == 1) featuresParagraph.textContent += "Grasslands ";
                 if (result.pilgrimage == 1) featuresParagraph.textContent += "Pilgrimage ";
                 var hotelsLink = document.createElement('a');
-                hotelsLink.href = 'hotels.php';
+                var locationId = result.locationId;
+                hotelsLink.href = 'hotels.php?lid=' + locationId;
                 hotelsLink.textContent = 'Hotels in this area';
-                hotelsLink.addEventListener('click', function() {
-                    var locationId = result.locationId;
-                    var setSessionXml = new XMLHttpRequest();
-                    setSessionXml.open("GET", "set_session.php?lid=" + locationId, true);
-                    setSessionXml.send();
-                });
-
-                // Append all elements to the result div
                 resultDiv.appendChild(wikipediaLink);
                 resultDiv.appendChild(nameParagraph);
                 resultDiv.appendChild(featuresParagraph);

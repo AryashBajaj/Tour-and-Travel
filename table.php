@@ -85,6 +85,7 @@ $sqlCreateHotelsTable = "
     CREATE TABLE IF NOT EXISTS hotels (
         hid INT PRIMARY KEY,
         locationId INT,
+        hName varchar(100),
         phone VARCHAR(20),
         email VARCHAR(255),
         FOREIGN KEY (locationId) REFERENCES locations(locationId)
