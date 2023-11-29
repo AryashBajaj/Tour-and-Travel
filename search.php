@@ -1,51 +1,6 @@
 <?php 
 session_start();
-function determineSeason($arrivalDate) {
-    $month = date('m', strtotime($arrivalDate));
-    if ($month >= 10 || $month <= 2) {
-        return 1;
-    } elseif ($month >= 3 && $month <= 6) {
-        return 2;
-    } else {
-        return 3;
-    }
-}
 ?>
-
-<script>
-    function displayResults(res) {
-        var resultsContainer = document.querySelector(".search-results");
-        resultsContainer.innerHTML = ""; // Clear previous results
-
-        // Loop through each result and display information
-        for (var i = 0; i < res.length; i++) {
-            var result = res[i];
-            var resultItem = document.createElement("div");
-            resultItem.className = "result-item";
-
-            // Display the image, name, and link
-            resultItem.innerHTML += "<img src='" + result.ilink + "' alt='Location Image' width='100'>";
-            resultItem.innerHTML += "<p>Name: " + result.locationName + "</p>";
-            resultItem.innerHTML += "<p><a href='hotel_page.php?locationId=" + result.locationId + "'>View Hotels</a></p>";
-
-            // Display notable features
-            resultItem.innerHTML += "<p>Notable Features: " + getNotableFeatures(result) + "</p>";
-
-            // Append the result item to the results container
-            resultsContainer.appendChild(resultItem);
-        }
-    }
-
-    function getNotableFeatures(result) {
-        var features = [];
-        if (result.beaches) features.push("Beaches");
-        if (result.mountains) features.push("Mountains");
-        if (result.land) features.push("Land");
-        if (result.pilgrimage) features.push("Pilgrimage");
-
-        return features.join(", ");
-    }
-</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,6 +8,11 @@ function determineSeason($arrivalDate) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="search.css">
+    <style>
+        td {
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <div class="content">
@@ -71,7 +31,7 @@ function determineSeason($arrivalDate) {
     </div>
 
     <div class="search">
-        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" id="search-form">
+        <form action="search.php" method="post" id="search-form">
             <table class="form-table">
                 <tr>
                     <td>Arrival Date</td>
@@ -105,7 +65,7 @@ function determineSeason($arrivalDate) {
                     </td>
                 </tr>
                 <tr>
-                    <td><button name="search" value="search">Search</button></td>
+                    <td><button id="search" name="search" value="search">Search</button></td>
                 </tr>
             </table>
         </form>
@@ -114,40 +74,33 @@ function determineSeason($arrivalDate) {
         <!-- Results will be displayed here -->
     </div>
 <?php
-    if (isset($_POST['search'])) {
-        $conn = mysqli_connect("localhost", "root", "", "dbwproj");
-        $arrivalDate = $_POST['arrivalDate'];
-        $departureDate = $_POST['departureDate'];
-        $adults = $_POST['adults'];
-        $kids = $_POST['kids'];
-        $preference = isset($_POST['pref']) ? $_POST['pref'] : [];
-        $season = determineSeason($arrivalDate);
-        $sql = "SELECT l.*, ld.* FROM locations l, ld WHERE l.locationId = ld.lid AND `season` = $season";
-        foreach ($preference as $pref) {
-            $sql .= " AND `$pref` = 1";
-        }
-        $res = mysqli_query($conn, $sql);
-        $data = array();
-        while ($row = mysqli_fetch_assoc($res)) {
-            $data[] = $row;
-        }
-        echo json_encode($data);
-    }
+if (isset($_POST['login'])) {
+    $_SESSION["arrivalDate"] = $_POST['arrivalDate'];
+    $_SESSION["departureDate"] = $_POST['departureDate'];
+    $_SESSION["adults"] = $_POST['adults'];
+    $_SESSION["kids"] = $_POST['kids'];
+    $_SESSION["preference"] = isset($_POST['pref']) ? $_POST['pref'] : [];
+}
 ?>
 <script>
     function displayResults(res) {
-        
+        return;
     }
-    var xml = new XMLHttpRequest();
-    xml.open("GET", "search.php", true);
-    xml.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var res = JSON.parse(this.responseText);
-            console.log(res);
-            displayResults(res);
+    function func() {
+        event.preventDefault();
+        var xml = new XMLHttpRequest();
+        xml.open("GET", "search1.php", true);
+        xml.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log("Hello");
+                var res = JSON.parse(this.responseText);
+                console.log(this.responseText);
+            }
         }
+        xml.send();
     }
-    xml.send();
+    document.getElementById("search").addEventListener("click", func);
 </script>
+
 </body>
 </html>

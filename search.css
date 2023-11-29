@@ -77,3 +77,6 @@ body{
     height: 200px;
     width: 300px;
 }
+td {
+    color: white;
+}
