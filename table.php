@@ -102,15 +102,13 @@ $sqlCreateUpdateLogTable = "
         newName VARCHAR(60),
         oldEmail VARCHAR(60),
         newEmail VARCHAR(60),
-        date DATETIME DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (userID)
+        date DATETIME DEFAULT CURRENT_TIMESTAMP
     )";
 if (mysqli_query($conn, $sqlCreateUpdateLogTable)) {
     echo "Update log table created successfully<br>";
 } else {
     echo "Error creating update log table: " . mysqli_error($conn) . "<br>";
 }
-
 
 mysqli_close($conn);
 ?>
