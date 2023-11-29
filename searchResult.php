@@ -70,39 +70,32 @@ session_start();
                 // Create a div to hold each result
                 var resultDiv = document.createElement('div');
                 resultDiv.classList.add('result-item');
-
-                // Create an image element
                 var image = document.createElement('img');
-                image.src = result.ilink; // Assuming ilink is the key for the image link
-                image.alt = result.locationName; // Alt text for accessibility
+                image.src = result.ilink;
+                image.alt = result.locationName;
                 image.width = 400;
                 image.height = 300;
-
-                // Create a link for the Wikipedia page
                 var wikipediaLink = document.createElement('a');
-                wikipediaLink.href = result.wlink; // Assuming wlink is the key for the Wikipedia link
-                wikipediaLink.target = '_blank'; // Open in a new tab
-                wikipediaLink.appendChild(image); // Make the image clickable
-
-                // Create a paragraph for the name of the location
+                wikipediaLink.href = result.wlink;
+                wikipediaLink.target = '_blank';
+                wikipediaLink.appendChild(image);
                 var nameParagraph = document.createElement('p');
                 nameParagraph.textContent = result.locationName;
-
-                // Create a paragraph for features
                 var featuresParagraph = document.createElement('p');
                 featuresParagraph.textContent = "Features: "; // You can customize this part based on your data model
-
-                // Assuming the features are stored as boolean values in the result object
                 if (result.beaches == 1) featuresParagraph.textContent += "Beaches ";
                 if (result.mountains == 1) featuresParagraph.textContent += "Mountains ";
                 if (result.grasslands == 1) featuresParagraph.textContent += "Grasslands ";
                 if (result.pilgrimage == 1) featuresParagraph.textContent += "Pilgrimage ";
-                // Add more conditions for other features
-
-                // Create a link for "Hotels in this area"
                 var hotelsLink = document.createElement('a');
-                hotelsLink.href = 'hotels.php'; // Link to hotels.php
+                hotelsLink.href = 'hotels.php';
                 hotelsLink.textContent = 'Hotels in this area';
+                hotelsLink.addEventListener('click', function() {
+                    var locationId = result.locationId;
+                    var setSessionXml = new XMLHttpRequest();
+                    setSessionXml.open("GET", "set_session.php?lid=" + locationId, true);
+                    setSessionXml.send();
+                });
 
                 // Append all elements to the result div
                 resultDiv.appendChild(wikipediaLink);
