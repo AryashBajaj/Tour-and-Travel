@@ -94,6 +94,7 @@ if (isset($_POST['login'])) {
             if (this.readyState == 4 && this.status == 200) {
                 console.log("Hello");
                 var res = JSON.parse(this.responseText);
+                console.log(res);
                 console.log(this.responseText);
             }
         }

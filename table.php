@@ -58,7 +58,7 @@ $sqlCreateLocationDetails = "
     CREATE TABLE IF NOT EXISTS ld (
         lid INT PRIMARY KEY,
         wlink varchar(200),
-        ilink varchar(300)
+        ilink varchar(1000)
     )";
 
 if (mysqli_query($conn, $sqlCreateLocationDetails)) {
