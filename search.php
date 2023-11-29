@@ -11,6 +11,41 @@ function determineSeason($arrivalDate) {
     }
 }
 ?>
+
+<script>
+    function displayResults(res) {
+        var resultsContainer = document.querySelector(".search-results");
+        resultsContainer.innerHTML = ""; // Clear previous results
+
+        // Loop through each result and display information
+        for (var i = 0; i < res.length; i++) {
+            var result = res[i];
+            var resultItem = document.createElement("div");
+            resultItem.className = "result-item";
+
+            // Display the image, name, and link
+            resultItem.innerHTML += "<img src='" + result.ilink + "' alt='Location Image' width='100'>";
+            resultItem.innerHTML += "<p>Name: " + result.locationName + "</p>";
+            resultItem.innerHTML += "<p><a href='hotel_page.php?locationId=" + result.locationId + "'>View Hotels</a></p>";
+
+            // Display notable features
+            resultItem.innerHTML += "<p>Notable Features: " + getNotableFeatures(result) + "</p>";
+
+            // Append the result item to the results container
+            resultsContainer.appendChild(resultItem);
+        }
+    }
+
+    function getNotableFeatures(result) {
+        var features = [];
+        if (result.beaches) features.push("Beaches");
+        if (result.mountains) features.push("Mountains");
+        if (result.land) features.push("Land");
+        if (result.pilgrimage) features.push("Pilgrimage");
+
+        return features.join(", ");
+    }
+</script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
