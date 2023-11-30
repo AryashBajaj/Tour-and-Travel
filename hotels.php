@@ -81,7 +81,7 @@ a.room-link:hover {
                 hotelData.forEach(function(hotel) {
                     var hotelDiv = document.createElement("div");
                     var hotelName = document.createElement("p");
-                    hotelName.textContent = "Hotel Name - " + hotel.hid;
+                    hotelName.textContent = "Hotel Name - " + hotel.hName;
                     hotelDiv.appendChild(hotelName);
                     var contactNumber = document.createElement("p");
                     contactNumber.textContent = "Contact Number - " + hotel.phone;
